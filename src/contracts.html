@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8" />
+      <title>Credit Bureau - Ethereum Proof of Concept Application</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+      <meta content="Ethereum Proof of Concept Application" name="description" />
+      <meta content="Andrei Mititelu" name="author" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <!-- App favicon -->
+      <link rel="shortcut icon" href="assets/images/favicon.ico">
+      <!-- Plugins css-->
+      <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+      <!-- Sweet Alert -->
+      <link href="assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css">
+      <!-- App css -->
+      <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+      <link href="assets/css/icons.css" rel="stylesheet" type="text/css" />
+      <link href="assets/css/metismenu.min.css" rel="stylesheet" type="text/css" />
+      <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
+      <script src="assets/js/modernizr.min.js"></script>
+   </head>
+   <body>
+      <!-- Begin page -->
+      <div id="wrapper">
+         <!-- Top Bar Start -->
+         <div class="topbar">
+            <!-- LOGO -->
+            <div class="topbar-left">
+               <a href="index.html" class="logo">
+               <span>
+               <img src="assets/images/logo.png" alt="">
+               </span>
+               <i>
+               <img src="assets/images/logo_sm.png" alt="">
+               </i>
+               </a>
+            </div>
+            <nav class="navbar-custom">
+                    <ul class="list-unstyled topbar-right-menu float-right mb-0">
+                       <li class="dropdown notification-list">
+                         <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-toggle="dropdown" href="#" role="button"
+                             aria-haspopup="false" aria-expanded="false"> 
+                             <strong>Account Address: </strong><span id="account" class="ml-1"></span>
+                          </a>
+                       </li> 
+                       <li class="dropdown notification-list">
+                             <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-toggle="dropdown" href="#" role="button"
+                                 aria-haspopup="false" aria-expanded="false"> 
+                                <strong>Balance: </strong><span id="accountBalance" class="ml-1"></span>
+                             </a>
+                          </li>
+                    </ul>
+                    <ul class="list-inline menu-left mb-0">
+                       <li class="float-left">
+                          <button class="button-menu-mobile open-left waves-light waves-effect">
+                          <i class="mdi mdi-menu"></i>
+                          </button>
+                       </li>
+                    </ul>
+                 </nav>
+         </div>
+         <!-- Top Bar End -->
+         <!-- ========== Left Sidebar Start ========== -->
+         <div class="left side-menu">
+            <!--- Sidemenu -->
+            <div id="sidebar-menu">
+                    <!-- Left Menu Start -->
+                    <ul class="metismenu" id="side-menu">
+                       <li class="menu-title">Navigation</li>
+                       <li>
+                          <a class="active" href="index.html">
+                          <i class="mdi mdi-account-search"></i><span> Search </span>
+                          </a>
+                       </li>
+                       <li>
+                          <a href="debtors.html">
+                          <i class="mdi mdi-account-network "></i><span> Debtors </span>
+                          </a>
+                       </li>
+                       <li>
+                             <a href="credits.html">
+                             <i class="mdi mdi-file-document-box"></i><span> Credits </span>
+                             </a>
+                       </li>
+                       <li>
+                             <a href="payments.html">
+                             <i class="mdi mdi-currency-btc "></i><span> Payments </span>
+                             </a>
+                       </li>
+                    </ul>
+                 </div>
+            <!-- Sidebar -->
+            <div class="clearfix"></div>
+         </div>
+         <!-- Left Sidebar End -->
+         <!-- ============================================================== -->
+         <!-- Start right Content here -->
+         <!-- ============================================================== -->
+         <div class="content-page">
+            <!-- Start content -->
+            <div class="content">
+               <div class="container-fluid">
+                  <!-- <div class="row">
+                     <div class="col-sm-12">
+                         <h4 class="header-title m-t-0 m-b-20">Welcome !</h4>
+                     </div>
+                     </div> -->
+                  <div class="row m-b-20">
+                     <div class="col-sm-12">
+                        <button type="button" class="btn btn-success btn-sm" onclick="App.showNewDebtorForm(this)">New Debtor</button>
+                        <button type="button" class="btn btn-success btn-sm" onclick="App.showNewCreditForm(this)">New Credit</button>
+                        <button type="button" class="btn btn-success btn-sm" onclick="App.showNewCreditForm(this)">New Payment</button>
+                     </div>
+                  </div>
+                  <!--end row -->
+                  <!-- begin row -->
+                  <div class="row m-b-20 form-section" id="new-debtor" style="display: none;">
+                     <div class="col-sm-12 m-b-20">
+                        <h6 class="header-title m-t-0">New Debtor <button type="button" class="btn btn-primary btn-xs btn-close pull-right" onclick="App.closePanels()">Close</button></h6>
+                     </div>
+                     <div class="col-sm-12">
+                        <form id="new_debtor_form">
+                           <h6 class="m-t-0 header-title font-14"><b>General Information</b></h6>
+                           <div class="row m-b-20">
+                              <!-- Full Name -->
+                              <div class="col-sm-4">
+                                 <div class="form-group">
+                                    <label for=""> Full Name</label><input name="fullname" id="fullname" class="form-control" placeholder="Full Name" type="input">
+                                 </div>
+                              </div>
+                              <!-- Full Name END -->
+                              <!-- Identification Code -->
+                              <div class="col-sm-4">
+                                 <div class="form-group">
+                                    <label for=""> Identification Code</label><input name="identification_code" id="identification_code" class="form-control" placeholder="Identification Code" type="input">
+                                 </div>
+                              </div>
+                              <!-- Identification Code END -->
+                              <div class="col-sm-4">
+                                 <!-- Country of Origin -->
+                                 <div class="form-group">
+                                    <label for=""> Country of Origin</label>
+                                    <select name="country" id="country" class="form-control">
+                                       <option value="--">--</option>
+                                       <option value="AF">Afghanistan</option>
+                                       <option value="AX">Åland Islands</option>
+                                       <option value="AL">Albania</option>
+                                       <option value="DZ">Algeria</option>
+                                       <option value="AS">American Samoa</option>
+                                       <option value="AD">Andorra</option>
+                                       <option value="AO">Angola</option>
+                                       <option value="AI">Anguilla</option>
+                                       <option value="AQ">Antarctica</option>
+                                       <option value="AG">Antigua and Barbuda</option>
+                                       <option value="AR">Argentina</option>
+                                       <option value="AM">Armenia</option>
+                                       <option value="AW">Aruba</option>
+                                       <option value="AU">Australia</option>
+                                       <option value="AT">Austria</option>
+                                       <option value="AZ">Azerbaijan</option>
+                                       <option value="BS">Bahamas</option>
+                                       <option value="BH">Bahrain</option>
+                                       <option value="BD">Bangladesh</option>
+                                       <option value="BB">Barbados</option>
+                                       <option value="BY">Belarus</option>
+                                       <option value="BE">Belgium</option>
+                                       <option value="BZ">Belize</option>
+                                       <option value="BJ">Benin</option>
+                                       <option value="BM">Bermuda</option>
+                                       <option value="BT">Bhutan</option>
+                                       <option value="BO">Bolivia, Plurinational State of</option>
+                                       <option value="BQ">Bonaire, Sint Eustatius and Saba</option>
+                                       <option value="BA">Bosnia and Herzegovina</option>
+                                       <option value="BW">Botswana</option>
+                                       <option value="BV">Bouvet Island</option>
+                                       <option value="BR">Brazil</option>
+                                       <option value="IO">British Indian Ocean Territory</option>
+                                       <option value="BN">Brunei Darussalam</option>
+                                       <option value="BG">Bulgaria</option>
+                                       <option value="BF">Burkina Faso</option>
+                                       <option value="BI">Burundi</option>
+                                       <option value="KH">Cambodia</option>
+                                       <option value="CM">Cameroon</option>
+                                       <option value="CA">Canada</option>
+                                       <option value="CV">Cape Verde</option>
+                                       <option value="KY">Cayman Islands</option>
+                                       <option value="CF">Central African Republic</option>
+                                       <option value="TD">Chad</option>
+                                       <option value="CL">Chile</option>
+                                       <option value="CN">China</option>
+                                       <option value="CX">Christmas Island</option>
+                                       <option value="CC">Cocos (Keeling) Islands</option>
+                                       <option value="CO">Colombia</option>
+                                       <option value="KM">Comoros</option>
+                                       <option value="CG">Congo</option>
+                                       <option value="CD">Congo, the Democratic Republic of the</option>
+                                       <option value="CK">Cook Islands</option>
+                                       <option value="CR">Costa Rica</option>
+                                       <option value="CI">Côte d'Ivoire</option>
+                                       <option value="HR">Croatia</option>
+                                       <option value="CU">Cuba</option>
+                                       <option value="CW">Curaçao</option>
+                                       <option value="CY">Cyprus</option>
+                                       <option value="CZ">Czech Republic</option>
+                                       <option value="DK">Denmark</option>
+                                       <option value="DJ">Djibouti</option>
+                                       <option value="DM">Dominica</option>
+                                       <option value="DO">Dominican Republic</option>
+                                       <option value="EC">Ecuador</option>
+                                       <option value="EG">Egypt</option>
+                                       <option value="SV">El Salvador</option>
+                                       <option value="GQ">Equatorial Guinea</option>
+                                       <option value="ER">Eritrea</option>
+                                       <option value="EE">Estonia</option>
+                                       <option value="ET">Ethiopia</option>
+                                       <option value="FK">Falkland Islands (Malvinas)</option>
+                                       <option value="FO">Faroe Islands</option>
+                                       <option value="FJ">Fiji</option>
+                                       <option value="FI">Finland</option>
+                                       <option value="FR">France</option>
+                                       <option value="GF">French Guiana</option>
+                                       <option value="PF">French Polynesia</option>
+                                       <option value="TF">French Southern Territories</option>
+                                       <option value="GA">Gabon</option>
+                                       <option value="GM">Gambia</option>
+                                       <option value="GE">Georgia</option>
+                                       <option value="DE">Germany</option>
+                                       <option value="GH">Ghana</option>
+                                       <option value="GI">Gibraltar</option>
+                                       <option value="GR">Greece</option>
+                                       <option value="GL">Greenland</option>
+                                       <option value="GD">Grenada</option>
+                                       <option value="GP">Guadeloupe</option>
+                                       <option value="GU">Guam</option>
+                                       <option value="GT">Guatemala</option>
+                                       <option value="GG">Guernsey</option>
+                                       <option value="GN">Guinea</option>
+                                       <option value="GW">Guinea-Bissau</option>
+                                       <option value="GY">Guyana</option>
+                                       <option value="HT">Haiti</option>
+                                       <option value="HM">Heard Island and McDonald Islands</option>
+                                       <option value="VA">Holy See (Vatican City State)</option>
+                                       <option value="HN">Honduras</option>
+                                       <option value="HK">Hong Kong</option>
+                                       <option value="HU">Hungary</option>
+                                       <option value="IS">Iceland</option>
+                                       <option value="IN">India</option>
+                                       <option value="ID">Indonesia</option>
+                                       <option value="IR">Iran, Islamic Republic of</option>
+                                       <option value="IQ">Iraq</option>
+                                       <option value="IE">Ireland</option>
+                                       <option value="IM">Isle of Man</option>
+                                       <option value="IL">Israel</option>
+                                       <option value="IT">Italy</option>
+                                       <option value="JM">Jamaica</option>
+                                       <option value="JP">Japan</option>
+                                       <option value="JE">Jersey</option>
+                                       <option value="JO">Jordan</option>
+                                       <option value="KZ">Kazakhstan</option>
+                                       <option value="KE">Kenya</option>
+                                       <option value="KI">Kiribati</option>
+                                       <option value="KP">Korea, Democratic People's Republic of</option>
+                                       <option value="KR">Korea, Republic of</option>
+                                       <option value="KW">Kuwait</option>
+                                       <option value="KG">Kyrgyzstan</option>
+                                       <option value="LA">Lao People's Democratic Republic</option>
+                                       <option value="LV">Latvia</option>
+                                       <option value="LB">Lebanon</option>
+                                       <option value="LS">Lesotho</option>
+                                       <option value="LR">Liberia</option>
+                                       <option value="LY">Libya</option>
+                                       <option value="LI">Liechtenstein</option>
+                                       <option value="LT">Lithuania</option>
+                                       <option value="LU">Luxembourg</option>
+                                       <option value="MO">Macao</option>
+                                       <option value="MK">Macedonia, the former Yugoslav Republic of</option>
+                                       <option value="MG">Madagascar</option>
+                                       <option value="MW">Malawi</option>
+                                       <option value="MY">Malaysia</option>
+                                       <option value="MV">Maldives</option>
+                                       <option value="ML">Mali</option>
+                                       <option value="MT">Malta</option>
+                                       <option value="MH">Marshall Islands</option>
+                                       <option value="MQ">Martinique</option>
+                                       <option value="MR">Mauritania</option>
+                                       <option value="MU">Mauritius</option>
+                                       <option value="YT">Mayotte</option>
+                                       <option value="MX">Mexico</option>
+                                       <option value="FM">Micronesia, Federated States of</option>
+                                       <option value="MD">Moldova, Republic of</option>
+                                       <option value="MC">Monaco</option>
+                                       <option value="MN">Mongolia</option>
+                                       <option value="ME">Montenegro</option>
+                                       <option value="MS">Montserrat</option>
+                                       <option value="MA">Morocco</option>
+                                       <option value="MZ">Mozambique</option>
+                                       <option value="MM">Myanmar</option>
+                                       <option value="NA">Namibia</option>
+                                       <option value="NR">Nauru</option>
+                                       <option value="NP">Nepal</option>
+                                       <option value="NL">Netherlands</option>
+                                       <option value="NC">New Caledonia</option>
+                                       <option value="NZ">New Zealand</option>
+                                       <option value="NI">Nicaragua</option>
+                                       <option value="NE">Niger</option>
+                                       <option value="NG">Nigeria</option>
+                                       <option value="NU">Niue</option>
+                                       <option value="NF">Norfolk Island</option>
+                                       <option value="MP">Northern Mariana Islands</option>
+                                       <option value="NO">Norway</option>
+                                       <option value="OM">Oman</option>
+                                       <option value="PK">Pakistan</option>
+                                       <option value="PW">Palau</option>
+                                       <option value="PS">Palestinian Territory, Occupied</option>
+                                       <option value="PA">Panama</option>
+                                       <option value="PG">Papua New Guinea</option>
+                                       <option value="PY">Paraguay</option>
+                                       <option value="PE">Peru</option>
+                                       <option value="PH">Philippines</option>
+                                       <option value="PN">Pitcairn</option>
+                                       <option value="PL">Poland</option>
+                                       <option value="PT">Portugal</option>
+                                       <option value="PR">Puerto Rico</option>
+                                       <option value="QA">Qatar</option>
+                                       <option value="RE">Réunion</option>
+                                       <option value="RO">Romania</option>
+                                       <option value="RU">Russian Federation</option>
+                                       <option value="RW">Rwanda</option>
+                                       <option value="BL">Saint Barthélemy</option>
+                                       <option value="SH">Saint Helena, Ascension and Tristan da Cunha</option>
+                                       <option value="KN">Saint Kitts and Nevis</option>
+                                       <option value="LC">Saint Lucia</option>
+                                       <option value="MF">Saint Martin (French part)</option>
+                                       <option value="PM">Saint Pierre and Miquelon</option>
+                                       <option value="VC">Saint Vincent and the Grenadines</option>
+                                       <option value="WS">Samoa</option>
+                                       <option value="SM">San Marino</option>
+                                       <option value="ST">Sao Tome and Principe</option>
+                                       <option value="SA">Saudi Arabia</option>
+                                       <option value="SN">Senegal</option>
+                                       <option value="RS">Serbia</option>
+                                       <option value="SC">Seychelles</option>
+                                       <option value="SL">Sierra Leone</option>
+                                       <option value="SG">Singapore</option>
+                                       <option value="SX">Sint Maarten (Dutch part)</option>
+                                       <option value="SK">Slovakia</option>
+                                       <option value="SI">Slovenia</option>
+                                       <option value="SB">Solomon Islands</option>
+                                       <option value="SO">Somalia</option>
+                                       <option value="ZA">South Africa</option>
+                                       <option value="GS">South Georgia and the South Sandwich Islands</option>
+                                       <option value="SS">South Sudan</option>
+                                       <option value="ES">Spain</option>
+                                       <option value="LK">Sri Lanka</option>
+                                       <option value="SD">Sudan</option>
+                                       <option value="SR">Suriname</option>
+                                       <option value="SJ">Svalbard and Jan Mayen</option>
+                                       <option value="SZ">Swaziland</option>
+                                       <option value="SE">Sweden</option>
+                                       <option value="CH">Switzerland</option>
+                                       <option value="SY">Syrian Arab Republic</option>
+                                       <option value="TW">Taiwan, Province of China</option>
+                                       <option value="TJ">Tajikistan</option>
+                                       <option value="TZ">Tanzania, United Republic of</option>
+                                       <option value="TH">Thailand</option>
+                                       <option value="TL">Timor-Leste</option>
+                                       <option value="TG">Togo</option>
+                                       <option value="TK">Tokelau</option>
+                                       <option value="TO">Tonga</option>
+                                       <option value="TT">Trinidad and Tobago</option>
+                                       <option value="TN">Tunisia</option>
+                                       <option value="TR">Turkey</option>
+                                       <option value="TM">Turkmenistan</option>
+                                       <option value="TC">Turks and Caicos Islands</option>
+                                       <option value="TV">Tuvalu</option>
+                                       <option value="UG">Uganda</option>
+                                       <option value="UA">Ukraine</option>
+                                       <option value="AE">United Arab Emirates</option>
+                                       <option value="GB">United Kingdom</option>
+                                       <option value="US">United States</option>
+                                       <option value="UM">United States Minor Outlying Islands</option>
+                                       <option value="UY">Uruguay</option>
+                                       <option value="UZ">Uzbekistan</option>
+                                       <option value="VU">Vanuatu</option>
+                                       <option value="VE">Venezuela, Bolivarian Republic of</option>
+                                       <option value="VN">Viet Nam</option>
+                                       <option value="VG">Virgin Islands, British</option>
+                                       <option value="VI">Virgin Islands, U.S.</option>
+                                       <option value="WF">Wallis and Futuna</option>
+                                       <option value="EH">Western Sahara</option>
+                                       <option value="YE">Yemen</option>
+                                       <option value="ZM">Zambia</option>
+                                       <option value="ZW">Zimbabwe</option>
+                                    </select>
+                                 </div>
+                                 <!-- Country Of Origin END -->
+                              </div>
+                           </div>
+                           <!-- Special Situation + Activity Code -->
+                           <div class="row">
+                              <div class="col-sm-12">
+                                 <h6 class="m-t-20 header-title font-14"><b>Debtor Information</b></h6>
+                              </div>
+                              <div class="col-sm-3">
+                                 <div class="form-group">
+                                    <label for=""> Activity Code</label><input name="activity_code" id="activity_code" class="form-control" placeholder="Activity Code (e.g. 0000)" type="input">
+                                 </div>
+                              </div>
+                              <div class="col-sm-3">
+                                 <div class="form-group">
+                                    <label for="">Special Situation</label>
+                                    <select name="special_situation" id="special_situation" class="form-control">
+                                       <option value="">--</option>
+                                       <option value="Restructuring">
+                                          Restructuring
+                                       </option>
+                                       <option value="Insolvency">
+                                          Insolvency
+                                       </option>
+                                       <option value="Bankruptcy">
+                                          Bankruptcy
+                                       </option>
+                                    </select>
+                                 </div>
+                              </div>
+                              <!-- Country of Origin + Legal Form -->
+                              <div class="col-sm-3">
+                                 <div class="form-group">
+                                    <label for="">Legal Form</label>
+                                    <select name="legal_form" id="legal_form" class="form-control">
+                                       <option value="">--</option>
+                                       <option value="Sole Proprietorship">
+                                          Sole Proprietorship
+                                       </option>
+                                       <option value="General Partnership">
+                                          General Partnership
+                                       </option>
+                                       <option value="Limited Partnership">
+                                          Limited Partnership
+                                       </option>
+                                       <option value="Regular Corporation">
+                                          Regular Corporation
+                                       </option>
+                                       <option value="S Corporation">
+                                          S Corporation
+                                       </option>
+                                       <option value="Professional Corporation">
+                                          Professional Corporation
+                                       </option>
+                                       <option value="Nonprofit Corporation">
+                                          Nonprofit Corporation
+                                       </option>
+                                       <option value="Limited Liability Company">
+                                          Limited Liability Company
+                                       </option>
+                                       <option value="Professional Limited Liability Company">
+                                          Professional Limited Liability Company
+                                       </option>
+                                       <option value="Limited Liability Partnership">
+                                          Limited Liability Partnership
+                                       </option>
+                                    </select>
+                                 </div>
+                              </div>
+                              <div class="col-sm-3">
+                                 <div class="form-group">
+                                    <label for="">Occupation Status</label>
+                                    <select name="occupation_status" id="occupation_status" class="form-control">
+                                       <option value="">--</option>
+                                       <option value="Employee">
+                                          Employee
+                                       </option>
+                                       <option value="Shareholder/Owner">
+                                          Shareholder/Owner
+                                       </option>
+                                       <option value="Unemployed">
+                                          Unemployed
+                                       </option>
+                                       <option value="Pensioner">
+                                          Pensioner
+                                       </option>
+                                       <option value="Student">
+                                          Student
+                                       </option>
+                                       <option value="Other">
+                                          Other
+                                       </option>
+                                    </select>
+                                 </div>
+                              </div>
+                              <!-- Country of Origin + Legal Form END -->
+                           </div>
+                           <!-- Special Situation + Activity Code END -->
+                           <!-- Group & Group ID -->
+                           <div class="row">
+                              <div class="col-sm-12">
+                                 <h6 class="m-t-0 header-title font-14"><b>Group Information</b></h6>
+                              </div>
+                              <div class="col-sm-6">
+                                 <div class="form-group">
+                                    <label for=""> Group</label>
+                                    <select name="group" id="group" class="form-control">
+                                       <option value="--">--</option>
+                                       <option value="Part of Group">
+                                          Part of Group
+                                       </option>
+                                       <option value="Individual">
+                                          Individual
+                                       </option>
+                                    </select>
+                                 </div>
+                              </div>
+                              <div class="col-sm-6">
+                                 <div class="form-group">
+                                    <label for=""> Group ID</label><input class="form-control" placeholder="Group ID" name="group_id" id="group_id" type="input">
+                                 </div>
+                              </div>
+                           </div>
+                           <!-- Group & Group ID END -->
+                           <div class="form-check">
+                              <label class="form-check-label"><input class="form-check-input" id="terms_and_conditions" type="checkbox">Debtor has agreed with having his personal information processed.</label>
+                           </div>
+                           <div class="form-buttons-w">
+                              <button class="btn btn-primary" onclick="App.addDebtor(); return false;" type="submit"> Submit</button>
+                           </div>
+                        </form>
+                     </div>
+                  </div>
+                  <!-- end row -->
+                  <!-- begin row -->
+                  <div class="row m-b-20 form-section" id="new-credit" style="display: none;">
+                     <div class="col-sm-12 m-b-20">
+                        <h6 class="header-title m-t-0">New Credit <button type="button" class="btn btn-primary btn-xs btn-close pull-right" onclick="App.closePanels()">Close</button></h6>
+                     </div>
+                     <div class="col-sm-12">
+                        <form id="new_credit_form">
+                           <!-- Identification Code + Other Debtors  -->
+                           <div class="row">
+                              <div class="col-sm-12">
+                                 <h6 class="m-t-20 header-title font-14"><b>General Information</b></h6>
+                              </div>
+                              <div class="col-sm-6">
+                                 <div class="form-group">
+                                    <label for=""> Credit Beneficiary (Identification Code)</label><input class="form-control" name="credit_beneficiary" id="credit_beneficiary" placeholder="Identification Code" type="input">
+                                 </div>
+                              </div>
+                              <div class="col-sm-6">
+                                 <div class="form-group">
+                                    <label for=""> Other Debtors</label>
+                                    <select name="other_debtors" id="other_debtors" class="form-control">
+                                       <option value="">--</option>
+                                       <option value="Own name">
+                                          Own name
+                                       </option>
+                                       <option value="Other Debtors">
+                                          Other Debtors
+                                       </option>
+                                    </select>
+                                 </div>
+                              </div>
+                           </div>
+                           <!-- Identification Code + Other Debtors END -->
+                           <!-- Guarantees -->
+                           <div class="row">
+                              <div class="col-sm-12">
+                                 <h6 class="m-t-20 header-title font-14"><b>Guarantees &amp; Risk Information</b></h6>
+                              </div>
+                              <div class="col-sm-4">
+                                 <div class="form-group">
+                                    <label for=""> Guarantees</label>
+                                    <select name="guarantees" id="guarantees" class="form-control">
+                                       <option value="">--</option>
+                                       <option value="Public Administration">
+                                          Public Administration
+                                       </option>
+                                       <option value="Insurance and Reinsurance Company">
+                                          Insurance and Reinsurance Company
+                                       </option>
+                                       <option value="Financial Institution">
+                                          Financial Institution
+                                       </option>
+                                       <option value="Pledges with Dispossession">
+                                          Pledges with Dispossession
+                                       </option>
+                                       <option value="Pledges without Dispossession">
+                                          Pledges without Dispossession
+                                       </option>
+                                       <option value="Collateral">
+                                          Collateral
+                                       </option>
+                                       <option value="Collateral Deposit">
+                                          Collateral Deposit
+                                       </option>
+                                       <option value="Non-financial Institution">
+                                          Non-financial Institution
+                                       </option>
+                                       <option value="Residential Building">
+                                          Residential Building
+                                       </option>
+                                       <option value="Commercial Building">
+                                          Commercial Building
+                                       </option>
+                                       <option value="Land">
+                                          Land
+                                       </option>
+                                       <option value="Other Mortgages">
+                                          Other Mortgages
+                                       </option>
+                                       <option value="Other Guarantees">
+                                          Other Guarantees
+                                       </option>
+                                    </select>
+                                 </div>
+                              </div>
+                              <div class="col-sm-4">
+                                 <div class="form-group">
+                                    <label for=""> Total Guarantees Value</label>
+                                    <div class="input-group">
+                                       <div class="input-group-addon">$</div>
+                                       <input name="total_guarantees_value" id="total_guarantees_value" class="form-control" placeholder="Total Guarantees Value" type="input">
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="col-sm-4">
+                                 <div class="form-group">
+                                    <label for=""> Risk Type</label>
+                                    <select name="risk_type" id="risk_type" class="form-control">
+                                       <option value="">--</option>
+                                       <option value="Commercial Credit">
+                                          Commercial Credit
+                                       </option>
+                                       <option value="Treasury Credit">
+                                          Treasury Credit
+                                       </option>
+                                       <option value="Foreign Trade">
+                                          Foreign Trade
+                                       </option>
+                                       <option value="Equipment">
+                                          Equipment
+                                       </option>
+                                       <option value="Mortgages">
+                                          Mortgages
+                                       </option>
+                                       <option value="Other Real Estate Investments">
+                                          Other Real Estate Investments
+                                       </option>
+                                       <option value="Consumption">
+                                          Consumption
+                                       </option>
+                                       <option value="Sales in Installments">
+                                          Sales in Installments
+                                       </option>
+                                       <option value="Other Credits">
+                                          Other Credits
+                                       </option>
+                                    </select>
+                                 </div>
+                              </div>
+                           </div>
+                           <!-- Guarantees END -->
+                           <!-- Credit -->
+                           <div class="row">
+                              <div class="col-sm-12">
+                                 <h6 class="m-t-20 header-title font-14"><b>Credit Information</b></h6>
+                              </div>
+                              <div class="col-sm-6">
+                                 <div class="form-group">
+                                    <label for=""> Award Term</label>
+                                    <select name="award_term" id="award_term" class="form-control">
+                                       <option value="">--</option>
+                                       <option value="Up to 12 months">
+                                          Up to 12 months
+                                       </option>
+                                       <option value="1 - 5 years">
+                                          1 - 5 years
+                                       </option>
+                                       <option value="Over 5 years">
+                                          Over 5 years
+                                       </option>
+                                    </select>
+                                 </div>
+                              </div>
+                              <div class="col-sm-6">
+                                 <div class="form-group">
+                                    <label for=""> Cards &amp; Leasing</label>
+                                    <select name="cards_and_leasing" id="cards_and_leasing" class="form-control">
+                                       <option value="">--</option>
+                                       <option value="Credit Cards">
+                                          Credit Cards
+                                       </option>
+                                       <option value="Debit with Overdraft Facility">
+                                          Debit with Overdraft Facility
+                                       </option>
+                                       <option value="Leasing">
+                                          Leasing
+                                       </option>
+                                       <option value="Other Credits">
+                                          Other Credits
+                                       </option>
+                                    </select>
+                                 </div>
+                              </div>
+                              <div class="col-sm-6">
+                                 <div class="form-group">
+                                    <label for=""> Credit Behavior</label>
+                                    <select name="credit_behavior" id="credit_behavior" class="form-control">
+                                       <option value="">--</option>
+                                       <option value="Credit">
+                                          Credit
+                                       </option>
+                                       <option value="Credit Line">
+                                          Credit Line
+                                       </option>
+                                    </select>
+                                 </div>
+                              </div>
+                              <div class="col-sm-6">
+                                 <div class="form-group">
+                                    <label for=""> Late Payments</label>
+                                    <select name="late_payments" id="late_payments" class="form-control">
+                                       <option value="">--</option>
+                                       <option value="Maximum 15 days">
+                                          Maximum 15 days
+                                       </option>
+                                       <option value="16 - 30 days">
+                                          16 - 30 days
+                                       </option>
+                                       <option value="31 - 60 days">
+                                          31 - 60 days
+                                       </option>
+                                       <option value="61 - 90 days">
+                                          61 - 90 days
+                                       </option>
+                                       <option value="91 - 180 days">
+                                          91 - 180 days
+                                       </option>
+                                       <option value="181 - 1 year">
+                                          181 - 1 year
+                                       </option>
+                                    </select>
+                                 </div>
+                              </div>
+                              <div class="col-sm-3">
+                                 <div class="form-group">
+                                    <label for=""> Currency</label>
+                                    <select name="currency" id="currency" class="form-control">
+                                       <option value="">--</option>
+                                       <option value="EUR">
+                                          EUR
+                                       </option>
+                                       <option value="USD">
+                                          USD
+                                       </option>
+                                       <option value="GBP">
+                                          GBP
+                                       </option>
+                                    </select>
+                                 </div>
+                              </div>
+                              <div class="col-sm-9">
+                                 <div class="form-group">
+                                    <label for=""> Amount</label>
+                                    <div class="input-group">
+                                       <div class="input-group-addon">$</div>
+                                       <input name="amount" id="amount" class="form-control" placeholder="Amount" type="input">
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <!-- Guarantees END -->
+                           <!-- Amounts -->
+                           <div class="row">
+                              <div class="col-sm-12">
+                                 <h6 class="m-t-20 header-title font-14"><b>Dates &amp; Schedules Information</b></h6>
+                              </div>
+                              <div class="col-sm-4">
+                                 <div class="form-group">
+                                    <label for=""> Start Date</label>
+                                    <div class="input-group">
+                                       <input name="start_date" class="form-control" placeholder="mm/dd/yyyy" id="start_date" type="text">
+                                       <span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar text-white"></i></span>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="col-sm-4">
+                                 <div class="form-group">
+                                    <label for=""> End Date</label>
+                                    <div class="input-group">
+                                       <input name="end_date" class="form-control" placeholder="mm/dd/yyyy" id="end_date" type="text">
+                                       <span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar text-white"></i></span>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="col-sm-4">
+                                 <div class="form-group">
+                                    <label for=""> Payments Interval</label>
+                                    <select name="payments_interval" id="payments_interval" class="form-control">
+                                       <option value="">--</option>
+                                       <option value="Monthly">
+                                          Monthly
+                                       </option>
+                                       <option value="Quarterly">
+                                          Quarterly
+                                       </option>
+                                       <option value="Yearly">
+                                          Yearly
+                                       </option>
+                                    </select>
+                                 </div>
+                              </div>
+                           </div>
+                           <!-- Amounts END -->
+                           <div class="form-buttons-w">
+                              <button class="btn btn-primary" onclick="App.addCredit(); return false;" type="submit"> Submit</button>
+                           </div>
+                        </form>
+                     </div>
+                  </div>
+                  <!-- end row -->
+               </div>
+               <!-- container -->
+               <div class="footer">
+                  <div class="pull-right hide-phone">
+                     Blockchain PoC using <strong class="text-custom">Ethereum &amp; Nodejs</strong>.
+                  </div>
+               </div>
+            </div>
+            <!-- content -->
+         </div>
+         <!-- ============================================================== -->
+         <!-- End Right content here -->
+         <!-- ============================================================== -->
+      </div>
+      <!-- END wrapper -->
+      <!-- jQuery  -->        
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+      <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+      <script src="assets/js/serializejson.min.js"></script>
+      <script src="assets/js/jquery.core.js"></script>
+      <script src="assets/js/jquery.app.js"></script>
+
+      <!-- Sweet-Alert  -->
+      <script src="assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
+      <script src="assets/pages/jquery.sweet-alert.init.js"></script>      
+      <!-- Dapp js -->
+      <script src="assets/js/web3.min.js"></script>
+      <script src="assets/js/truffle-contract.js"></script>
+      <script src="assets/js/app.js"></script>
+   </body>
+</html>

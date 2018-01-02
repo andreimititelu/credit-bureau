@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8" />
+      <title>Credit Bureau - Ethereum Proof of Concept Application</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+      <meta content="Ethereum Proof of Concept Application" name="description" />
+      <meta content="Andrei Mititelu" name="author" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <!-- App favicon -->
+      <link rel="shortcut icon" href="assets/images/favicon.ico">
+      <!-- Plugins css-->
+      <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+      <!-- Sweet Alert -->
+      <link href="assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css">
+      <!-- App css -->
+      <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+      <link href="assets/css/icons.css" rel="stylesheet" type="text/css" />
+      <link href="assets/css/metismenu.min.css" rel="stylesheet" type="text/css" />
+      <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
+      <script src="assets/js/modernizr.min.js"></script>
+   </head>
+   <body>
+      <!-- Begin page -->
+      <div id="wrapper">
+         <!-- Top Bar Start -->
+         <div class="topbar">
+            <!-- LOGO -->
+            <div class="topbar-left">
+               <a href="index.html" class="logo">
+               <span>
+               <img src="assets/images/logo.png" alt="">
+               </span>
+               <i>
+               <img src="assets/images/logo_sm.png" alt="">
+               </i>
+               </a>
+            </div>
+            <nav class="navbar-custom">
+                    <ul class="list-unstyled topbar-right-menu float-right mb-0">
+                       <li class="dropdown notification-list">
+                         <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-toggle="dropdown" href="#" role="button"
+                             aria-haspopup="false" aria-expanded="false"> 
+                             <strong>Account Address: </strong><span id="account" class="ml-1"></span>
+                          </a>
+                       </li> 
+                       <li class="dropdown notification-list">
+                             <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-toggle="dropdown" href="#" role="button"
+                                 aria-haspopup="false" aria-expanded="false"> 
+                                <strong>Balance: </strong><span id="accountBalance" class="ml-1"></span>
+                             </a>
+                          </li>
+                    </ul>
+                    <ul class="list-inline menu-left mb-0">
+                       <li class="float-left">
+                          <button class="button-menu-mobile open-left waves-light waves-effect">
+                          <i class="mdi mdi-menu"></i>
+                          </button>
+                       </li>
+                    </ul>
+                 </nav>
+         </div>
+         <!-- Top Bar End -->
+         <!-- ========== Left Sidebar Start ========== -->
+         <div class="left side-menu">
+            <!--- Sidemenu -->
+            <div id="sidebar-menu">
+                    <!-- Left Menu Start -->
+                    <ul class="metismenu" id="side-menu">
+                       <li class="menu-title">Navigation</li>
+                       <li>
+                          <a href="index.html">
+                          <i class="mdi mdi-account-search"></i><span> Search </span>
+                          </a>
+                       </li>
+                       <li>
+                          <a href="debtors.html">
+                          <i class="mdi mdi-account-network "></i><span> Debtors </span>
+                          </a>
+                       </li>
+                       <li>
+                             <a href="credits.html">
+                             <i class="mdi mdi-file-document-box"></i><span> Credits </span>
+                             </a>
+                       </li>
+                       <li>
+                             <a href="payments.html">
+                             <i class="mdi mdi-currency-btc "></i><span> Payments </span>
+                             </a>
+                       </li>
+                    </ul>
+                 </div>
+            <!-- Sidebar -->
+            <div class="clearfix"></div>
+         </div>
+         <!-- Left Sidebar End -->
+         <!-- ============================================================== -->
+         <!-- Start right Content here -->
+         <!-- ============================================================== -->
+         <div class="content-page">
+            <!-- Start content -->
+            <div class="content">
+               <div class="container-fluid">
+                  
+                  <!-- begin row -->
+                  <div class="row m-b-20 form-section" id="new-credit" >
+                     <div class="col-sm-12 m-b-20">
+                        <h6 class="header-title m-t-0">New Credit</h6>
+                     </div>
+                     <div class="col-sm-12">
+                        <form id="new_credit_form">
+                           <!-- Identification Code + Other Debtors  -->
+                           <div class="row">
+                              <div class="col-sm-12">
+                                 <h6 class="m-t-20 header-title font-14"><b>General Information</b></h6>
+                              </div>
+                              <div class="col-sm-6">
+                                 <div class="form-group">
+                                    <label for=""> Credit Beneficiary (Identification Code)</label><input class="form-control" name="credit_beneficiary" id="credit_beneficiary" placeholder="Identification Code" type="input">
+                                 </div>
+                              </div>
+                              <div class="col-sm-6">
+                                 <div class="form-group">
+                                    <label for=""> Other Debtors</label>
+                                    <select name="other_debtors" id="other_debtors" class="form-control">
+                                       <option value="">--</option>
+                                       <option value="Own name">
+                                          Own name
+                                       </option>
+                                       <option value="Other Debtors">
+                                          Other Debtors
+                                       </option>
+                                    </select>
+                                 </div>
+                              </div>
+                           </div>
+                           <!-- Identification Code + Other Debtors END -->
+                           <!-- Guarantees -->
+                           <div class="row">
+                              <div class="col-sm-12">
+                                 <h6 class="m-t-20 header-title font-14"><b>Guarantees &amp; Risk Information</b></h6>
+                              </div>
+                              <div class="col-sm-4">
+                                 <div class="form-group">
+                                    <label for=""> Guarantees</label>
+                                    <select name="guarantees" id="guarantees" class="form-control">
+                                       <option value="">--</option>
+                                       <option value="Public Administration">
+                                          Public Administration
+                                       </option>
+                                       <option value="Insurance and Reinsurance Company">
+                                          Insurance and Reinsurance Company
+                                       </option>
+                                       <option value="Financial Institution">
+                                          Financial Institution
+                                       </option>
+                                       <option value="Pledges with Dispossession">
+                                          Pledges with Dispossession
+                                       </option>
+                                       <option value="Pledges without Dispossession">
+                                          Pledges without Dispossession
+                                       </option>
+                                       <option value="Collateral">
+                                          Collateral
+                                       </option>
+                                       <option value="Collateral Deposit">
+                                          Collateral Deposit
+                                       </option>
+                                       <option value="Non-financial Institution">
+                                          Non-financial Institution
+                                       </option>
+                                       <option value="Residential Building">
+                                          Residential Building
+                                       </option>
+                                       <option value="Commercial Building">
+                                          Commercial Building
+                                       </option>
+                                       <option value="Land">
+                                          Land
+                                       </option>
+                                       <option value="Other Mortgages">
+                                          Other Mortgages
+                                       </option>
+                                       <option value="Other Guarantees">
+                                          Other Guarantees
+                                       </option>
+                                    </select>
+                                 </div>
+                              </div>
+                              <div class="col-sm-4">
+                                 <div class="form-group">
+                                    <label for=""> Total Guarantees Value</label>
+                                    <div class="input-group">
+                                       <div class="input-group-addon">$</div>
+                                       <input name="total_guarantees_value" id="total_guarantees_value" class="form-control" placeholder="Total Guarantees Value" type="input">
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="col-sm-4">
+                                 <div class="form-group">
+                                    <label for=""> Risk Type</label>
+                                    <select name="risk_type" id="risk_type" class="form-control">
+                                       <option value="">--</option>
+                                       <option value="Commercial Credit">
+                                          Commercial Credit
+                                       </option>
+                                       <option value="Treasury Credit">
+                                          Treasury Credit
+                                       </option>
+                                       <option value="Foreign Trade">
+                                          Foreign Trade
+                                       </option>
+                                       <option value="Equipment">
+                                          Equipment
+                                       </option>
+                                       <option value="Mortgages">
+                                          Mortgages
+                                       </option>
+                                       <option value="Other Real Estate Investments">
+                                          Other Real Estate Investments
+                                       </option>
+                                       <option value="Consumption">
+                                          Consumption
+                                       </option>
+                                       <option value="Sales in Installments">
+                                          Sales in Installments
+                                       </option>
+                                       <option value="Other Credits">
+                                          Other Credits
+                                       </option>
+                                    </select>
+                                 </div>
+                              </div>
+                           </div>
+                           <!-- Guarantees END -->
+                           <!-- Credit -->
+                           <div class="row">
+                              <div class="col-sm-12">
+                                 <h6 class="m-t-20 header-title font-14"><b>Credit Information</b></h6>
+                              </div>
+                              <div class="col-sm-6">
+                                 <div class="form-group">
+                                    <label for=""> Award Term</label>
+                                    <select name="award_term" id="award_term" class="form-control">
+                                       <option value="">--</option>
+                                       <option value="Up to 12 months">
+                                          Up to 12 months
+                                       </option>
+                                       <option value="1 - 5 years">
+                                          1 - 5 years
+                                       </option>
+                                       <option value="Over 5 years">
+                                          Over 5 years
+                                       </option>
+                                    </select>
+                                 </div>
+                              </div>
+                              <div class="col-sm-6">
+                                 <div class="form-group">
+                                    <label for=""> Cards &amp; Leasing</label>
+                                    <select name="cards_and_leasing" id="cards_and_leasing" class="form-control">
+                                       <option value="">--</option>
+                                       <option value="Credit Cards">
+                                          Credit Cards
+                                       </option>
+                                       <option value="Debit with Overdraft Facility">
+                                          Debit with Overdraft Facility
+                                       </option>
+                                       <option value="Leasing">
+                                          Leasing
+                                       </option>
+                                       <option value="Other Credits">
+                                          Other Credits
+                                       </option>
+                                    </select>
+                                 </div>
+                              </div>
+                              <div class="col-sm-6">
+                                 <div class="form-group">
+                                    <label for=""> Credit Behavior</label>
+                                    <select name="credit_behavior" id="credit_behavior" class="form-control">
+                                       <option value="">--</option>
+                                       <option value="Credit">
+                                          Credit
+                                       </option>
+                                       <option value="Credit Line">
+                                          Credit Line
+                                       </option>
+                                    </select>
+                                 </div>
+                              </div>
+                              <div class="col-sm-6">
+                                 <div class="form-group">
+                                    <label for=""> Late Payments</label>
+                                    <select name="late_payments" id="late_payments" class="form-control">
+                                       <option value="">--</option>
+                                       <option value="Maximum 15 days">
+                                          Maximum 15 days
+                                       </option>
+                                       <option value="16 - 30 days">
+                                          16 - 30 days
+                                       </option>
+                                       <option value="31 - 60 days">
+                                          31 - 60 days
+                                       </option>
+                                       <option value="61 - 90 days">
+                                          61 - 90 days
+                                       </option>
+                                       <option value="91 - 180 days">
+                                          91 - 180 days
+                                       </option>
+                                       <option value="181 - 1 year">
+                                          181 - 1 year
+                                       </option>
+                                    </select>
+                                 </div>
+                              </div>
+                              <div class="col-sm-3">
+                                 <div class="form-group">
+                                    <label for=""> Currency</label>
+                                    <select name="currency" id="currency" class="form-control">
+                                       <option value="">--</option>
+                                       <option value="EUR">
+                                          EUR
+                                       </option>
+                                       <option value="USD">
+                                          USD
+                                       </option>
+                                       <option value="GBP">
+                                          GBP
+                                       </option>
+                                    </select>
+                                 </div>
+                              </div>
+                              <div class="col-sm-9">
+                                 <div class="form-group">
+                                    <label for=""> Amount</label>
+                                    <div class="input-group">
+                                       <div class="input-group-addon">$</div>
+                                       <input name="amount" id="amount" class="form-control" placeholder="Amount" type="input">
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <!-- Guarantees END -->
+                           <!-- Amounts -->
+                           <div class="row">
+                              <div class="col-sm-12">
+                                 <h6 class="m-t-20 header-title font-14"><b>Dates &amp; Schedules Information</b></h6>
+                              </div>
+                              <div class="col-sm-4">
+                                 <div class="form-group">
+                                    <label for=""> Start Date</label>
+                                    <div class="input-group">
+                                       <input name="start_date" class="form-control" placeholder="mm/dd/yyyy" id="start_date" type="text">
+                                       <span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar text-white"></i></span>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="col-sm-4">
+                                 <div class="form-group">
+                                    <label for=""> End Date</label>
+                                    <div class="input-group">
+                                       <input name="end_date" class="form-control" placeholder="mm/dd/yyyy" id="end_date" type="text">
+                                       <span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar text-white"></i></span>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="col-sm-4">
+                                 <div class="form-group">
+                                    <label for=""> Payments Interval</label>
+                                    <select name="payments_interval" id="payments_interval" class="form-control">
+                                       <option value="">--</option>
+                                       <option value="Monthly">
+                                          Monthly
+                                       </option>
+                                       <option value="Quarterly">
+                                          Quarterly
+                                       </option>
+                                       <option value="Yearly">
+                                          Yearly
+                                       </option>
+                                    </select>
+                                 </div>
+                              </div>
+                           </div>
+                           <!-- Amounts END -->
+                           <div class="form-buttons-w">
+                              <button class="btn btn-primary" onclick="App.addCredit(); return false;" type="submit"> Submit</button>
+                           </div>
+                        </form>
+                     </div>
+                  </div>
+                  <!-- end row -->
+               </div>
+               <!-- container -->
+               <div class="footer">
+                  <div class="pull-right hide-phone">
+                     Blockchain PoC using <strong class="text-custom">Ethereum &amp; Nodejs</strong>.
+                  </div>
+               </div>
+            </div>
+            <!-- content -->
+         </div>
+         <!-- ============================================================== -->
+         <!-- End Right content here -->
+         <!-- ============================================================== -->
+      </div>
+      <!-- END wrapper -->
+      <!-- jQuery  -->        
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+      <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+      <script src="assets/js/serializejson.min.js"></script>
+      <script src="assets/js/jquery.core.js"></script>
+      <script src="assets/js/jquery.app.js"></script>
+
+      <!-- Sweet-Alert  -->
+      <script src="assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
+      <script src="assets/pages/jquery.sweet-alert.init.js"></script>      
+      <!-- Dapp js -->
+      <script src="assets/js/web3.min.js"></script>
+      <script src="assets/js/truffle-contract.js"></script>
+      <script src="assets/js/app.js"></script>
+   </body>
+</html>
