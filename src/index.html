@@ -1,379 +1,88 @@
 <!DOCTYPE html>
 <html>
-   <head>
-      <meta charset="utf-8" />
-      <title>Credit Bureau - Ethereum Proof of Concept Application</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-      <meta content="Ethereum Proof of Concept Application" name="description" />
-      <meta content="Andrei Mititelu" name="author" />
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <!-- App favicon -->
-      <link rel="shortcut icon" href="assets/images/favicon.ico">
-      <!-- App css -->
-      <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-      <link href="assets/css/icons.css" rel="stylesheet" type="text/css" />
-      <link href="assets/css/metismenu.min.css" rel="stylesheet" type="text/css" />
-      <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
-      <script src="assets/js/modernizr.min.js"></script>
-   </head>
-   <body>
-      <!-- Begin page -->
-      <div id="wrapper">
-         <!-- Top Bar Start -->
-         <div class="topbar">
-            <!-- LOGO -->
-            <div class="topbar-left">
-               <a href="index.html" class="logo">
-               <span>
-               <img src="assets/images/logo.png" alt="">
-               </span>
-               <i>
-               <img src="assets/images/logo_sm.png" alt="">
-               </i>
-               </a>
-            </div>
-            <nav class="navbar-custom">
-               <ul class="list-unstyled topbar-right-menu float-right mb-0">
-                  <li class="dropdown notification-list">
-                    <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-toggle="dropdown" href="#" role="button"
-                        aria-haspopup="false" aria-expanded="false"> 
-                        <strong>Account Address: </strong><span id="account" class="ml-1"></span>
-                     </a>
-                  </li> 
-                  <li class="dropdown notification-list">
-                        <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-toggle="dropdown" href="#" role="button"
-                            aria-haspopup="false" aria-expanded="false"> 
-                           <strong>Balance: </strong><span id="accountBalance" class="ml-1"></span>
-                        </a>
-                     </li>
-               </ul>
-               <ul class="list-inline menu-left mb-0">
-                  <li class="float-left">
-                     <button class="button-menu-mobile open-left waves-light waves-effect">
-                     <i class="mdi mdi-menu"></i>
-                     </button>
-                  </li>
-               </ul>
-            </nav>
-         </div>
-         <!-- Top Bar End -->
-         <!-- ========== Left Sidebar Start ========== -->
-         <div class="left side-menu">
-            <!--- Sidemenu -->
-            <div id="sidebar-menu">
-               <!-- Left Menu Start -->
-               <ul class="metismenu" id="side-menu">
-                  <li class="menu-title">Navigation</li>
-                  <li>
-                     <a href="index.html">
-                     <i class="mdi mdi-account-search"></i><span> Search </span>
-                     </a>
-                  </li>
-                  <li>
-                     <a href="debtors.html">
-                     <i class="mdi mdi-account-network "></i><span> Debtors </span>
-                     </a>
-                  </li>
-                  <li>
-                        <a href="credits.html">
-                        <i class="mdi mdi-file-document-box"></i><span> Credits </span>
-                        </a>
-                  </li>
-                  <li>
-                        <a href="payments.html">
-                        <i class="mdi mdi-currency-btc "></i><span> Payments </span>
-                        </a>
-                  </li>
-               </ul>
-            </div>
-            <!-- Sidebar -->
-            <div class="clearfix"></div>
-         </div>
-         <!-- Left Sidebar End -->
-         <!-- ============================================================== -->
-         <!-- Start right Content here -->
-         <!-- ============================================================== -->
-         <div class="content-page">
-            <!-- Start content -->
-            <div class="content">
-               <div class="container-fluid">
-                  <!-- <div class="row">
-                     <div class="col-sm-12">
-                         <h4 class="header-title m-t-0 m-b-20">Welcome !</h4>
-                     </div>
-                     </div> -->
-                  <div class="row">
-                     <div class="col-sm-12">
-                        <div class="card-box widget-inline">
-                           <div class="row">
-                              <div class="col-lg-4 col-sm-6">
-                                 <div class="widget-inline-box text-center">
-                                    <h3 class="m-t-10"><i class="text-primary mdi mdi-face-profile"></i> <b id="lifetime_debtors">0</b></h3>
-                                    <p class="text-muted">Lifetime debtors</p>
-                                 </div>
-                              </div>
-                              <div class="col-lg-4 col-sm-6">
-                                 <div class="widget-inline-box text-center">
-                                    <h3 class="m-t-10"><i class="text-custom mdi mdi-file-chart"></i> <b id="lifetime_credits">0</b></h3>
-                                    <p class="text-muted">Lifetime credits</p>
-                                 </div>
-                              </div>
-                              <div class="col-lg-4 col-sm-6">
-                                 <div class="widget-inline-box text-center b-0">
-                                    <h3 class="m-t-10"><i class="text-info mdi mdi-eye"></i> <b id="lifetime_queries">0</b></h3>
-                                    <p class="text-muted">Lifetime queries</p>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <!--end row -->
-                  <!-- begin row -->
-                  <div class="row">
-                     <div class="col-sm-12">
-                        <h4 class="header-title m-t-0 m-b-20">Search</h4>
-                     </div>
-                  </div>
-                  <!-- end row -->
-                  <!-- begin row -->
-                  <div class="row m-b-20">
-                     <div class="col-sm-12">
-                        <form class="form-horizontal" role="form">
-                           <div class="input-group">
-                              <input type="text" id="search" name="search" class="form-control" placeholder="Searching for a debtor is possible only by Identification Code (e.g. Social Security Number).">
-                              <span class="input-group-btn">
-                              <button type="submit" class="btn btn-primary" onclick="App.search(); return false;"><i class="fa fa-search"></i></button>
-                              </span>
-                           </div>
-                        </form>
-                     </div>
-                  </div>
-                  <!-- end row -->
-                  <!-- begin row -->
-                  <div class="row m-b-20 form-section" id="debtor_information" style="display: none">
-                        <div class="col-sm-12 m-b-20">
-                           <h6 class="header-title m-t-0"></h6>
-                        </div>
-                        <div class="col-sm-12">
-                           <form id="search_results_debtor_information_form">
-                              <h6 class="m-t-0 header-title font-14"><b>Debtor Information</b></h6>
-                              <div class="row m-b-20">
-                                 <!-- Full Name -->
-                                 <div class="col-sm-3">
-                                    <div class="form-group">
-                                       <label for=""> Full Name</label><input name="fullname" id="fullname" class="form-control" disabled placeholder="" type="input">
-                                    </div>
-                                 </div>
-                                 <!-- Full Name END -->
-                                 <!-- Country -->
-                                 <div class="col-sm-2">
-                                    <div class="form-group">
-                                       <label for=""> Country</label><input name="country" id="country" class="form-control" disabled placeholder="" type="input">
-                                    </div>
-                                 </div>
-                                 <!-- Country END -->
-                                 <!-- Activity Code -->
-                                 <div class="col-sm-3">
-                                        <div class="form-group">
-                                           <label for=""> Activity Code</label><input name="activity_code" id="activity_code" class="form-control" disabled placeholder="" type="input">
-                                        </div>
-                                 </div>
-                                 <!-- Activity Code END -->
-                                 <!-- Special Situation -->
-                                 <div class="col-sm-4">
-                                        <div class="form-group">
-                                           <label for=""> Special Situation</label><input name="special_situation" id="special_situation" class="form-control" disabled placeholder="" type="input">
-                                        </div>
-                                 </div>
-                                 <!-- Special Situation END -->
-                                 <!-- Legal Form -->
-                                 <div class="col-sm-6">
-                                        <div class="form-group">
-                                           <label for=""> Legal Form</label><input name="legal_form" id="legal_form" class="form-control" disabled placeholder="" type="input">
-                                        </div>
-                                 </div>
-                                 <!-- Legal Form END -->
-                                 <!-- Occupation Status -->
-                                 <div class="col-sm-6">
-                                        <div class="form-group">
-                                           <label for=""> Occupation Status</label><input name="occupation_status" id="occupation_status" class="form-control" disabled placeholder="" type="input">
-                                        </div>
-                                 </div>                                 
-                                 <!-- Occupation Status END -->
-                              </div>
-                              
-                           </form>
-                        </div>
-                     </div>
-                     <!-- end row -->
-                     <!-- begin row -->
-                    <div class="row m-b-20 form-section" id="accounts_information" style="display: none">
-                        <div class="col-sm-12">
-                           <form id="search_results_debtor_information_form">
-                              <div class="row m-b-20">
-                                 <!-- Accounts -->
-                                 <div class="col-sm-4">
-                                        <div class="form-group">
-                                           <label for=""> Select Account</label>
-                                           <select name="accounts" id="accounts" class="form-control">
-                                              <option value="">--</option>
-                                           </select>
-                                        </div>
-                                </div>
-                                 <!-- Accounts END -->
-                                 <div class="col-sm-2">
-                                        <div class="form-group m-t-20">
-                                            <button class="btn btn-primary view-account" onclick="App.getCredit(); return false;" type="submit"> View</button>
-                                        </div>
-                                 </div>
-                              </div>
-                              
-                           </form>
-                        </div>
-                     </div>
-                     <!-- end row -->
-                     <!-- begin row -->
-                    <div class="row m-b-20 form-section" id="credit_information" style="display: none">
-                            <div class="col-sm-12">
-                               <form id="search_results_debtor_information_form">
-                                  <h6 class="m-t-0 header-title font-14"><b>Credit Information</b></h6>
-                                  <div class="row m-b-20">
-                                     <!-- Award Term -->
-                                    <div class="col-sm-2">
-                                            <div class="form-group">
-                                            <label for=""> Award Term</label><input name="award_term" id="award_term" class="form-control" disabled placeholder="" type="input">
-                                            </div>
-                                    </div>                                 
-                                    <!-- Award Term END -->
-                                    <!-- Cards & Leasing -->
-                                    <div class="col-sm-2">
-                                            <div class="form-group">
-                                            <label for=""> Cards &amp; Leasing</label><input name="cards_and_leasing" id="cards_and_leasing" class="form-control" disabled placeholder="" type="input">
-                                            </div>
-                                    </div>     
-                                    <!-- Cards & Leasing END -->
-                                    <!-- Credit Behavior -->
-                                    <div class="col-sm-2">
-                                            <div class="form-group">
-                                            <label for=""> Credit Behavior</label><input name="credit_behavior" id="credit_behavior" class="form-control" disabled placeholder="" type="input">
-                                            </div>
-                                    </div>     
-                                    <!-- Credit Behavior END -->
-                                    <!-- Late Payments -->
-                                    <div class="col-sm-2">
-                                            <div class="form-group">
-                                            <label for=""> Late Payments</label><input name="late_payments" id="late_payments" class="form-control" disabled placeholder="" type="input">
-                                            </div>
-                                    </div>     
-                                    <!-- Late Payments END -->
-                                    <!-- Amount -->
-                                    <div class="col-sm-3">
-                                            <div class="form-group">
-                                            <label for=""> Amount</label><input name="amount" id="amount" class="form-control" disabled placeholder="" type="input">
-                                            </div>
-                                    </div>     
-                                    <!-- Amount END -->
-                                    <!-- Currency -->
-                                    <div class="col-sm-1">
-                                            <div class="form-group">
-                                            <label for=""> Currency</label><input name="currency" id="currency" class="form-control" disabled placeholder="" type="input">
-                                            </div>
-                                    </div>     
-                                    <!-- Currency END -->
-                                
-                                  </div>
-                               </form>
-                            </div>
-                    </div>
-                    <!-- end row -->
-                    <!-- begin row -->
-                    <div class="row m-b-20 form-section" id="schedules_information" style="display: none;">
-                            <div class="col-sm-12">
-                               <form id="search_results_debtor_information_form">
-                                  <h6 class="m-t-0 header-title font-14"><b>Dates &amp; Schedules Information</b></h6>
-                                  <div class="row m-b-20">
-                                     <!-- Start Date -->
-                                    <div class="col-sm-4">
-                                            <div class="form-group">
-                                            <label for=""> Start Date</label><input name="start_date" id="start_date" class="form-control" disabled placeholder="" type="input">
-                                            </div>
-                                    </div>                                 
-                                    <!-- Start Date END -->
-                                    <!-- End Date -->
-                                    <div class="col-sm-4">
-                                            <div class="form-group">
-                                            <label for=""> End Date</label><input name="end_date" id="end_date" class="form-control" disabled placeholder="" type="input">
-                                            </div>
-                                    </div>     
-                                    <!-- End Dat END -->
-                                    <!-- Payments Interval -->
-                                    <div class="col-sm-4">
-                                            <div class="form-group">
-                                            <label for=""> Payments Interval</label><input name="payments_interval" id="payments_interval" class="form-control" disabled placeholder="" type="input">
-                                            </div>
-                                    </div>     
-                                    <!-- Payments Interval END -->                                
-                                  </div>
-                               </form>
-                            </div>
-                    </div>
-                    <!-- end row -->
-                    <!-- begin row -->
-                    <div class="row m-b-20 form-section" id="payment_information" style="display: none;" >
-                            <div class="col-sm-12">
-                                    <h6 class="m-t-0 header-title font-14 m-b-20 "><b>Payments Information</b></h6>
-                                            <table id="payments" class="table m-0 table-bordered ">
+        <head>
+                <meta charset="utf-8" />
+                <title>Credit Bureau - Ethereum Proof of Concept Application</title>
+                <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+                <meta content="Ethereum Proof of Concept Application" name="description" />
+                <meta content="Andrei Mititelu" name="author" />
+                <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+                <!-- App favicon -->
+                <link rel="shortcut icon" href="assets/images/favicon.ico">
+                <!-- Plugins css-->
+                <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+                <!-- Sweet Alert -->
+                <link href="assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css">
+                <!-- App css -->
+                <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+                <link href="assets/css/icons.css" rel="stylesheet" type="text/css" />
+                <link href="assets/css/metismenu.min.css" rel="stylesheet" type="text/css" />
+                <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
+                <script src="assets/js/modernizr.min.js"></script>
+             </head>
 
-                                                <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>Amount</th>
-                                                    <th>Payment Date</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                            
-                                                </tbody>
-                                            </table>                               
+    <body>
+
+        <section>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+
+                        <div class="wrapper-page">
+
+                            <div class="m-t-40 card-box">
+                                <div class="text-center">
+                                    <h2 class="text-uppercase m-t-0 m-b-30">
+                                        <a href="index.html" class="text-success">
+                                            <span><img src="assets/images/logo_dark.png" alt="" height="30"></span>
+                                        </a>
+                                    </h2>
+                                    <!--<h4 class="text-uppercase font-bold m-b-0">Sign In</h4>-->
+                                </div>
+                                <div class="account-content">
+                                    <div class="text-center m-b-20">
+                                        <p class="text-muted m-b-0 font-13 line-h-24">Please load your Metamask account in order to proceed. Once you have loaded an account, refresh the page and press the unlock button. </p>
+                                    </div>
+
+                                    <form class="form-horizontal" action="#">
+                                        <div class="form-group account-btn text-center m-t-10">
+                                            <div class="col-xs-12">
+                                                <button class="btn btn-lg btn-primary btn-block" onclick="App.unlock(); return false;" type="submit">Unlock</button>
+                                            </div>
+                                        </div>
+
+                                    </form>
+
+                                    <div class="clearfix"></div>
+
+                                </div>
                             </div>
+                            <!-- end card-box-->
+
+
+                        </div>
+                        <!-- end wrapper -->
+
                     </div>
-                    <!-- end row -->
-        
-               </div>
-               <!-- container -->
-               <div class="footer">
-                  <div class="pull-right hide-phone">
-                     Blockchain PoC using <strong class="text-custom">Ethereum &amp; Nodejs</strong>.
-                  </div>
-               </div>
+                </div>
             </div>
-            <!-- content -->
-         </div>
-         <!-- ============================================================== -->
-         <!-- End Right content here -->
-         <!-- ============================================================== -->
-      </div>
-      <!-- END wrapper -->
-      <!-- jQuery  -->
-      <!-- <script src="assets/js/jquery.min.js"></script> -->
-      <!--  <script src="assets/js/popper.min.js"></script>
-         <script src="assets/js/bootstrap.min.js"></script>
-         <script src="assets/js/metisMenu.min.js"></script>
-         <script src="assets/js/waves.js"></script>
-         <script src="assets/js/jquery.slimscroll.js"></script> -->
-      <!--Morris Chart-->
-      <!-- <script src="assets/plugins/morris/morris.min.js"></script>
-         <script src="assets/plugins/raphael/raphael-min.js"></script> -->
-      <!-- Dashboard init -->
-      <!-- <script src="assets/pages/jquery.dashboard.js"></script> -->
-      <!-- App js -->
-      <!-- Dapp js -->
+        </section>
+
+
+      <!-- jQuery  -->        
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+      <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+      <script src="assets/js/serializejson.min.js"></script>
       <script src="assets/js/jquery.core.js"></script>
       <script src="assets/js/jquery.app.js"></script>
+
+      <!-- Sweet-Alert  -->
+      <script src="assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
+      <script src="assets/pages/jquery.sweet-alert.init.js"></script>      
+      <!-- Dapp js -->
       <script src="assets/js/web3.min.js"></script>
       <script src="assets/js/truffle-contract.js"></script>
       <script src="assets/js/app.js"></script>
-   </body>
+
+    </body>
 </html>

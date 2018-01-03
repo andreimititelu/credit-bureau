@@ -12,7 +12,7 @@ App = {
   // Init Web3 Component
   initWeb3: function() {
     // Initialize web3 and set the provider to the testRPC.
-    console.log (web3.currentProvider);
+    console.log ("Web3 Provider: ", web3.currentProvider);
     if (typeof web3 !== 'undefined') {
       App.web3Provider = web3.currentProvider;
       web3 = new Web3(web3.currentProvider);
@@ -21,8 +21,23 @@ App = {
       App.web3Provider = new Web3.providers.HttpProvider('http://localhost:8545');
       web3 = new Web3(App.web3Provider);
     }
+
     App.displayAccountInfo();
     return App.initContract();
+  },
+
+
+  // Unlock application
+  unlock : function () {
+    console.log ("Unlock account!");
+    console.log (App.account);
+
+    if (App.account == 0 || App.account === null) {
+      swal("No account was selected!");
+    } else {
+      // Redirect to search page
+      window.location.replace("search.html");
+    }
   },
 
   // Display Account Info
@@ -30,7 +45,8 @@ App = {
     web3.eth.getCoinbase(function(err, account) {
       console.log ("Account:", account);
       console.log ("Error:", err);
-      if (err === null) {
+
+      if (account !== null) {
         App.account = account;
         $("#account").text(account);
         web3.eth.getBalance(account, function(err, balance) {
@@ -39,6 +55,12 @@ App = {
             $("#accountBalance").text(web3.fromWei(balance, "ether") + " ETH");
           }
         });
+      } else {
+        var url = new URL(window.location.href);
+        if (url.pathname != "/") {
+          // Redirect to lock screen
+          window.location.replace("/");
+        }
       }
     });
   },
@@ -65,6 +87,43 @@ App = {
           $("#lifetime_queries").text(results[2]);
       });
     });
+  },
+
+  validate : function(id) {
+
+    $.validate({
+        onError : function($form) {
+          console.log('Validation of form '+$form.attr('id')+' failed!');
+          return false;
+        },
+        onSuccess : function($form) {
+          console.log('The form '+$form.attr('id')+' is valid!');
+          switch(id) {
+            case "debtor":
+                App.addDebtor();
+                break;
+            case "credit":
+                App.addCredit();
+                break;
+            case "payment":
+                App.addPayment();
+                break;
+            default:
+                console.log("Default");
+          } 
+
+          return false; // Will stop the submission of the form
+        },
+        onValidate : function($form) {
+            console.log('On Validate!');
+        }
+      });
+  },
+
+  convertDate : function(inputFormat) {
+    function pad(s) { return (s < 10) ? '0' + s : s; }
+    var d = new Date(inputFormat);
+    return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/');
   },
 
   search: function() {
@@ -129,8 +188,8 @@ App = {
 
             instance.getCreditSchedules(identificationCode,creditAccount).then(function (results) {
                 console.log (results);
-                $("input#start_date").val(new Date(results[0] * 100));
-                $("input#end_date").val(new Date(results[1] * 100));
+                $("input#start_date").val(App.convertDate(results[0].c[0]));
+                $("input#end_date").val(App.convertDate(results[1].c[0]));
                 $("input#payments_interval").val(results[2]);
 
                 $("#credit_information, #schedules_information").show("fast");
@@ -138,7 +197,7 @@ App = {
                 instance.getPayments(identificationCode, creditAccount).then(function (results) {
                     console.log (results);
                     for (var i=0; i < results[0].length; i++) {
-                      $("#payments tbody").append('<tr><th scope="row">' + (i + 1) + '</th>' + '<td>' + results[0][i] + '</td>' + '<td>' + new Date(results[1][i] * 100) + '</td></tr>');
+                      $("#payments tbody").append('<tr><th scope="row">' + (i + 1) + '</th>' + '<td>' + results[0][i] + '</td>' + '<td>' + App.convertDate(results[1][i].c[0]) + '</td></tr>');
                     }
                     $("#payment_information").show("fast");
                     

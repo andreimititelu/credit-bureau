@@ -34,6 +34,7 @@ app.getCreditSchedules("GZ099192",100000);
 
 app.addPayment("GZ099192",100000,100000,1514558869);
 app.getPayments("GZ099192", 100000);
+app.getPayments("GZ1234", 100000);
 
 /* app.addAccount("andrei", 1, {from: web3.eth.accounts[0]})
 app.getCreditOfficer("andrei");

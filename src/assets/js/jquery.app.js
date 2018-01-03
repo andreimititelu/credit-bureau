@@ -55,8 +55,11 @@
     }
 
     function datePicker() {
-        $( "#start_date, #end_date" ).datepicker();
-
+        try {
+            $( "#start_date, #end_date" ).datepicker();
+        } catch (e) {
+            console.log ("There was an error with loading Date Picker: ", e);
+        }
     }
 
     function init() {
@@ -65,6 +68,7 @@
         initLeftMenuCollapse();
         initEnlarge();
         initActiveMenu();
+        // validateForms();
         datePicker();
     }
 

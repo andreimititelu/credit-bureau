@@ -1,5 +1,11 @@
 {
   "server": {
-    "baseDir": ["./src", "./build/contracts"]
+    "baseDir": ["./src", "./build/contracts"],
+    "serveStaticOptions": {
+      "extensions": [
+            "html",
+            "js"
+      ]  
+    }
   }
 }

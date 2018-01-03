@@ -27,7 +27,7 @@
          <div class="topbar">
             <!-- LOGO -->
             <div class="topbar-left">
-               <a href="index.html" class="logo">
+               <a href="search.html" class="logo">
                <span>
                <img src="assets/images/logo.png" alt="">
                </span>
@@ -69,7 +69,7 @@
                     <ul class="metismenu" id="side-menu">
                        <li class="menu-title">Navigation</li>
                        <li>
-                          <a href="index.html">
+                          <a href="search.html">
                           <i class="mdi mdi-account-search"></i><span> Search </span>
                           </a>
                        </li>
@@ -116,13 +116,13 @@
                               </div>
                               <div class="col-sm-6">
                                  <div class="form-group">
-                                    <label for=""> Credit Beneficiary (Identification Code)</label><input class="form-control" name="credit_beneficiary" id="credit_beneficiary" placeholder="Identification Code" type="input">
+                                    <label for=""> Credit Beneficiary (Identification Code)</label><input class="form-control" data-validation="required" name="credit_beneficiary" id="credit_beneficiary" placeholder="Identification Code" type="input">
                                  </div>
                               </div>
                               <div class="col-sm-6">
                                  <div class="form-group">
                                     <label for=""> Other Debtors</label>
-                                    <select name="other_debtors" id="other_debtors" class="form-control">
+                                    <select data-validation="required" name="other_debtors" id="other_debtors" class="form-control">
                                        <option value="">--</option>
                                        <option value="Own name">
                                           Own name
@@ -143,7 +143,7 @@
                               <div class="col-sm-4">
                                  <div class="form-group">
                                     <label for=""> Guarantees</label>
-                                    <select name="guarantees" id="guarantees" class="form-control">
+                                    <select data-validation="required" name="guarantees" id="guarantees" class="form-control">
                                        <option value="">--</option>
                                        <option value="Public Administration">
                                           Public Administration
@@ -192,14 +192,14 @@
                                     <label for=""> Total Guarantees Value</label>
                                     <div class="input-group">
                                        <div class="input-group-addon">$</div>
-                                       <input name="total_guarantees_value" id="total_guarantees_value" class="form-control" placeholder="Total Guarantees Value" type="input">
+                                       <input data-validation="required" name="total_guarantees_value" id="total_guarantees_value" class="form-control" placeholder="Total Guarantees Value" type="input">
                                     </div>
                                  </div>
                               </div>
                               <div class="col-sm-4">
                                  <div class="form-group">
                                     <label for=""> Risk Type</label>
-                                    <select name="risk_type" id="risk_type" class="form-control">
+                                    <select data-validation="required" name="risk_type" id="risk_type" class="form-control">
                                        <option value="">--</option>
                                        <option value="Commercial Credit">
                                           Commercial Credit
@@ -241,7 +241,7 @@
                               <div class="col-sm-6">
                                  <div class="form-group">
                                     <label for=""> Award Term</label>
-                                    <select name="award_term" id="award_term" class="form-control">
+                                    <select data-validation="required" name="award_term" id="award_term" class="form-control">
                                        <option value="">--</option>
                                        <option value="Up to 12 months">
                                           Up to 12 months
@@ -258,7 +258,7 @@
                               <div class="col-sm-6">
                                  <div class="form-group">
                                     <label for=""> Cards &amp; Leasing</label>
-                                    <select name="cards_and_leasing" id="cards_and_leasing" class="form-control">
+                                    <select data-validation="required" name="cards_and_leasing" id="cards_and_leasing" class="form-control">
                                        <option value="">--</option>
                                        <option value="Credit Cards">
                                           Credit Cards
@@ -278,7 +278,7 @@
                               <div class="col-sm-6">
                                  <div class="form-group">
                                     <label for=""> Credit Behavior</label>
-                                    <select name="credit_behavior" id="credit_behavior" class="form-control">
+                                    <select data-validation="required" name="credit_behavior" id="credit_behavior" class="form-control">
                                        <option value="">--</option>
                                        <option value="Credit">
                                           Credit
@@ -292,7 +292,7 @@
                               <div class="col-sm-6">
                                  <div class="form-group">
                                     <label for=""> Late Payments</label>
-                                    <select name="late_payments" id="late_payments" class="form-control">
+                                    <select data-validation="required" name="late_payments" id="late_payments" class="form-control">
                                        <option value="">--</option>
                                        <option value="Maximum 15 days">
                                           Maximum 15 days
@@ -318,7 +318,7 @@
                               <div class="col-sm-3">
                                  <div class="form-group">
                                     <label for=""> Currency</label>
-                                    <select name="currency" id="currency" class="form-control">
+                                    <select data-validation="required" name="currency" id="currency" class="form-control">
                                        <option value="">--</option>
                                        <option value="EUR">
                                           EUR
@@ -337,7 +337,7 @@
                                     <label for=""> Amount</label>
                                     <div class="input-group">
                                        <div class="input-group-addon">$</div>
-                                       <input name="amount" id="amount" class="form-control" placeholder="Amount" type="input">
+                                       <input data-validation="required" name="amount" id="amount" class="form-control" placeholder="Amount" type="input">
                                     </div>
                                  </div>
                               </div>
@@ -352,7 +352,7 @@
                                  <div class="form-group">
                                     <label for=""> Start Date</label>
                                     <div class="input-group">
-                                       <input name="start_date" class="form-control" placeholder="mm/dd/yyyy" id="start_date" type="text">
+                                       <input data-validation="required" name="start_date" class="form-control" placeholder="mm/dd/yyyy" id="start_date" type="text">
                                        <span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar text-white"></i></span>
                                     </div>
                                  </div>
@@ -361,7 +361,7 @@
                                  <div class="form-group">
                                     <label for=""> End Date</label>
                                     <div class="input-group">
-                                       <input name="end_date" class="form-control" placeholder="mm/dd/yyyy" id="end_date" type="text">
+                                       <input data-validation="required" name="end_date" class="form-control" placeholder="mm/dd/yyyy" id="end_date" type="text">
                                        <span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar text-white"></i></span>
                                     </div>
                                  </div>
@@ -369,7 +369,7 @@
                               <div class="col-sm-4">
                                  <div class="form-group">
                                     <label for=""> Payments Interval</label>
-                                    <select name="payments_interval" id="payments_interval" class="form-control">
+                                    <select data-validation="required" name="payments_interval" id="payments_interval" class="form-control">
                                        <option value="">--</option>
                                        <option value="Monthly">
                                           Monthly
@@ -386,7 +386,8 @@
                            </div>
                            <!-- Amounts END -->
                            <div class="form-buttons-w">
-                              <button class="btn btn-primary" onclick="App.addCredit(); return false;" type="submit"> Submit</button>
+                              <!-- <button class="btn btn-primary" onclick="App.addCredit(); return false;" type="submit"> Submit</button> -->
+                              <button class="btn btn-primary" onclick="App.validate('credit');" type="submit"> Submit</button>
                            </div>
                         </form>
                      </div>
@@ -410,6 +411,7 @@
       <!-- jQuery  -->        
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
       <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
       <script src="assets/js/serializejson.min.js"></script>
       <script src="assets/js/jquery.core.js"></script>
       <script src="assets/js/jquery.app.js"></script>
