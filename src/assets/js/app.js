@@ -84,7 +84,7 @@ App = {
           console.log ("Display Stats: ", results);
           $("#lifetime_debtors").text(results[0]);
           $("#lifetime_credits").text(results[1]);
-          $("#lifetime_queries").text(results[2]);
+          $("#lifetime_payments").text(results[2]);
       });
     });
   },

@@ -64,7 +64,7 @@ contract CreditBureau {
     uint public account = 100000;
     uint public debtorsNo = 0;
     uint public creditsNo = 0;
-    uint public queriesNo = 0;
+    uint public paymentsNo = 0;
 
 /* ======================================================================================================================
     Constructor Functions
@@ -233,6 +233,8 @@ contract CreditBureau {
             _date
         ));
 
+        paymentsNo++;
+
     }
 
 /* ======================================================================================================================
@@ -243,7 +245,7 @@ function getStats() public constant returns (uint, uint, uint) {
     return (
         debtorsNo,
         creditsNo,
-        queriesNo
+        paymentsNo
     );
 }
 
@@ -255,8 +257,8 @@ function getCreditsNo() public constant returns (uint) {
     return(creditsNo);
 }
 
-function getQueriesNo() public constant returns (uint) {
-    return(queriesNo);
+function getPaymentsNo() public constant returns (uint) {
+    return(paymentsNo);
 }
 
 /* ======================================================================================================================
